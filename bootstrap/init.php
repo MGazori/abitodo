@@ -12,4 +12,5 @@ try {
     diePage('Connection failed: ' . $e->getMessage());
 }
 
-// echo "connection successfully";
+include "libs/lib-auth.php";
+include "libs/lib-tasks.php";

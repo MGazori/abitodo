@@ -13,7 +13,7 @@
   <div class="page">
     <div class="pageHeader">
       <div class="title">Dashboard</div>
-      <div class="userPanel"><i class="fa fa-chevron-down"></i><span class="username">M.Gazori </span><img src="https://www.gravatar.com/avatar/30998dbdc70c018dea724d761b1c7c73?s=40&d=mm&r=g" width="40" height="40" /></div>
+      <div class="userPanel"><i class="fa fa-chevron-down"></i><span class="username">M.Gazori </span><img src="assets/img/user.jpeg" width="40" height="40" /></div>
     </div>
     <div class="main">
       <div class="nav">
@@ -25,10 +25,14 @@
         <div class="menu">
           <div class="title">Navigation</div>
           <ul>
-            <li> <i class="fa fa-home"></i>Home</li>
-            <li><i class="fa fa-signal"></i>Activity</li>
-            <li class="active"> <i class="fa fa-tasks"></i>Manage Tasks</li>
-            <li> <i class="fa fa-envelope"></i>Messages</li>
+            <!-- show users folder -->
+            <?php foreach ($folders as $folder) : ?>
+              <li>
+                <a href="?folder_id=<?= $folder->id ?>"><i class="fa fa-folder"></i><?= $folder->name ?></a>
+                <a href="?delete_folder=<?= $folder->id ?>"><i class="fa fa-times removeFolderBtn"></i></a>
+              </li>
+            <?php endforeach; ?>
+            <li class="active"> <i class="fa fa-folder-open"></i>Messages</li>
           </ul>
         </div>
       </div>
