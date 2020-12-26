@@ -1,4 +1,4 @@
-<?php
+<?php defined('BASE_PATH') OR die("Permision Denied!");
 
 //define function for error die page
 function diePage($msg)

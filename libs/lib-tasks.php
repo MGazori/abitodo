@@ -1,4 +1,4 @@
-<?php
+<?php defined('BASE_PATH') or die("Permision Denied!");
 // define function for get folders list
 function getFolders()
 {
