@@ -4,7 +4,7 @@
 
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css");
 html {
-    /* background-image: url(../img/background.jpg); */
+    background-image: url(../img/background.jpg);
     background-color: #eee;
 }
 
@@ -378,4 +378,74 @@ button.addFolderbtn:hover {
 
 .addFolderbtn i {
     font-size: 16px;
+}
+
+span.task-created-at {
+    margin: 0 10px;
+    font-size: 16px;
+}
+
+button.removeTaskBtn {
+    width: 30px;
+    height: 30px;
+    color: #f44336;
+    font-size: 20px;
+    position: relative;
+    top: 2px;
+    margin-right: 10px;
+    background: no-repeat;
+    border: none;
+    cursor: pointer;
+}
+
+button.removeTaskBtn:before {
+    content: "\f00d";
+    font-family: 'FontAwesome';
+}
+
+button.removeFolderBtn {
+    color: #f44336;
+    font-size: 19px;
+    margin-right: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    float: right;
+}
+
+button.removeFolderBtn:before {
+    content: "\f00d";
+    font-family: 'FontAwesome';
+}
+
+span.folderTitle {
+    color: #2196F3;
+    padding-left: 5px;
+}
+
+li.folderRow:before {
+    content: "\f07b";
+    font-family: 'FontAwesome';
+    font-size: 20px;
+    color: #2196F3;
+    position: relative;
+    top: 2px;
+}
+
+li.folderRow.active:before {
+    content: "\f07c";
+    font-family: 'FontAwesome';
+    font-size: 20px;
+    color: #2196F3;
+    position: relative;
+    top: 2px;
+}
+
+.emptyTask {
+    position: absolute;
+    font-size: 25px;
+    color: #f44336;
+    background-color: rgb(244 67 54 / 0.1);
+    padding: 3px 15px;
+    border-radius: 5px;
 }

@@ -1,4 +1,4 @@
-<?php defined('BASE_PATH') OR die("Permision Denied!");
+<?php defined('BASE_PATH') or die("Permision Denied!");
 
 //define function for error die page
 function diePage($msg)
@@ -15,4 +15,11 @@ function isAjaxRequest()
     } else {
         return false;
     }
+}
+//beadufull var_dump
+function dd($data)
+{
+    echo "<pre style='color: #455A64;font-size: 18px;position:relative;background-color:#ffffff;border-radius:10px;z-index: 999;margin: 10px;padding: 20px;border-left: 5px solid #2196F3;'>";
+    var_dump($data);
+    echo "</pre>";
 }

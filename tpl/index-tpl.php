@@ -27,14 +27,14 @@
         <div class="menu">
           <div class="title">Navigation</div>
           <ul id="foldersList">
-            <!-- show users folder -->
+            <li class="folderRow active" data-folder-id="all"><span class="folderTitle">All Tasks</span></li>
+            <!-- show user folder -->
             <?php foreach ($folders as $folder) : ?>
-              <li>
-                <a href="?folder_id=<?= $folder->id ?>"><i class="fa fa-folder"></i><?= $folder->name ?></a>
-                <a href="?delete_folder=<?= $folder->id ?>"><i class="fa fa-times removeFolderBtn"></i></a>
+              <li class="folderRow" data-folder-id="<?= $folder->id ?>">
+                <span class="folderTitle" data-folder-id="<?= $folder->id ?>"><?= $folder->name ?></span>
+                <button class="removeFolderBtn" data-folder-id="<?= $folder->id ?>"></button>
               </li>
             <?php endforeach; ?>
-            <li class="active"> <i class="fa fa-folder-open"></i>Messages</li>
           </ul>
         </div>
         <div class="addFolderBox">
@@ -58,29 +58,18 @@
         <div class="content">
           <div class="list">
             <div class="title">Today</div>
-            <ul>
-              <li class="checked"><i class="fa fa-check-square-o"></i><span>Update team page</span>
-                <div class="info">
-                  <div class="button green">In progress</div><span>Complete by 25/04/2014</span>
-                </div>
-              </li>
-              <li><i class="fa fa-square-o"></i><span>Design a new logo</span>
-                <div class="info">
-                  <div class="button">Pending</div><span>Complete by 10/04/2014</span>
-                </div>
-              </li>
-              <li><i class="fa fa-square-o"></i><span>Find a front end developer</span>
-                <div class="info"></div>
-              </li>
+            <ul id="taskList">
+              <!-- show user tasks -->
+              <?php foreach ($tasks as $task) : ?>
+                <li data-task-id="<?= $task->id ?>" <?= ($task->is_done) ? "class='checked taskRow'" : "class='taskRow'" ?>><i class="fa <?= ($task->is_done) ? "fa-check-square-o" : 'fa-square-o' ?>"></i><span><?= $task->title ?></span>
+                  <div class="info">
+                    <span class="task-created-at"><?= $task->created_at ?></span>
+                    <button class="removeTaskBtn" data-task-id="<?= $task->id ?>"></button>
+                  </div>
+                </li>
+              <?php endforeach; ?>
             </ul>
           </div>
-          <!-- <div class="list">
-            <div class="title">Tomorrow</div>
-            <ul>
-              <li><i class="fa fa-square-o"></i><span>Find front end developer</span>
-                <div class="info"></div>
-              </li>
-            </ul> -->
         </div>
       </div>
     </div>

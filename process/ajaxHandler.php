@@ -21,6 +21,39 @@ switch ($_POST['action']) {
             echo json_encode(addNewFolderRow($lasInsertId));
         }
         break;
+    case "deleteFolder":
+        if (!isset($_POST['deleteFolderId'])) {
+            $deleteFolderError = [
+                "name" => "deleteFolderError",
+                "description" => "Folder not deleted!"
+            ];
+            echo json_encode($deleteFolderError);
+        } else {
+            echo json_encode(deleteFolders($_POST['deleteFolderId']));
+        }
+        break;
+    case "selectFolder":
+        if (!isset($_POST['folderSelectedId'])) {
+            $deleteFolderError = [
+                "name" => "selectFolderError",
+                "description" => "Folder not deleted!"
+            ];
+            echo json_encode($deleteFolderError);
+        } else {
+            filterTasksByFolder($_POST['folderSelectedId']);
+        }
+        break;
+    case "deleteTask":
+        if (!isset($_POST['deleteTaskId'])) {
+            $deleteTaskError = [
+                "name" => "deleteTaskError",
+                "description" => "Task not deleted!"
+            ];
+            echo json_encode($deleteTaskError);
+        } else {
+            echo json_encode(deleteTasks($_POST['deleteTaskId']));
+        }
+        break;
     default:
         diePage("Invalid Action!");
 }
