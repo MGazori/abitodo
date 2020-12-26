@@ -11,13 +11,14 @@ function getFolders()
     return $records;
 }
 // define function for add folders list
-function addFolders($data)
+function addFolder($folderName)
 {
     global $pdo;
-    $sql = "select * from folders";
+    $userId = getCurrentUserID();
+    $sql = "INSERT INTO folders (name,user_id) VALUES (:folderName , :user_id)";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    $records = $stmt->fetchAll(PDO::FETCH_OBJ);
+    $stmt->execute([":folderName" => $folderName, ":user_id" => $userId]);
+    $records = $pdo->lastInsertId();
     return $records;
 }
 // define function for remove folder
@@ -28,4 +29,15 @@ function deleteFolders($data)
     $stmt = $pdo->prepare($sql);
     $stmt->execute(["folderID" => $data]);
     return $stmt->rowCount();
+}
+// define function for return information added folder
+function addNewFolderRow($lastInsertFolderId)
+{
+    global $pdo;
+    $userId = getCurrentUserID();
+    $sql = "SELECT id,name FROM folders WHERE id = :lastAddId AND user_id = :user_id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([":lastAddId" => $lastInsertFolderId, ":user_id" => $userId]);
+    $records = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $records;
 }

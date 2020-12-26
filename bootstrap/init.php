@@ -1,8 +1,8 @@
 <?php
 
 include "constants.php";
-include "config.php";
-include "libs/helpers.php";
+include BASE_PATH . "bootstrap/config.php";
+include BASE_PATH . "libs/helpers.php";
 
 //start and set pdo connection
 
@@ -12,5 +12,5 @@ try {
     diePage('Connection failed: ' . $e->getMessage());
 }
 
-include "libs/lib-auth.php";
-include "libs/lib-tasks.php";
+include BASE_PATH . "libs/lib-auth.php";
+include BASE_PATH . "libs/lib-tasks.php";

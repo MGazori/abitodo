@@ -16,6 +16,14 @@ body {
     font-smooth: antialiased;
 }
 
+a {
+    text-decoration: none;
+}
+
+:focus {
+    outline: none;
+}
+
 .page {
     position: absolute;
     width: 80%;
@@ -323,4 +331,51 @@ body {
 
 .clear {
     clear: both;
+}
+
+
+/* add folder */
+
+.addFolderBox {
+    position: absolute;
+    bottom: 0;
+    height: 30px;
+    line-height: 30px;
+    margin: 15px;
+    background-color: #ffffff;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+input#addFolderInput {
+    width: 130px;
+    background-color: #ffffff;
+    color: Black;
+    font-family: "Lato";
+    border: 0px;
+    margin-left: 5px;
+}
+
+button.addFolderbtn {
+    position: relative;
+    right: 4px;
+    width: 25px;
+    height: 25px;
+    color: #4CAF50;
+    background-color: rgba(76, 175, 80, 0.2);
+    border-radius: 5px;
+    border: 1px none;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button.addFolderbtn:hover {
+    color: #ffffff;
+    background-color: rgba(76, 175, 80, 0.8);
+    /* background-color: #4CAF50; */
+}
+
+.addFolderbtn i {
+    font-size: 16px;
 }

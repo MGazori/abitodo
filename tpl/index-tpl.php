@@ -5,14 +5,15 @@
   <meta charset="UTF-8">
   <title><?= SITE_TITLE ?></title>
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
 
 </head>
 
 <body>
-  <!-- partial:index.partial.html -->
   <div class="page">
     <div class="pageHeader">
-      <div class="title">Dashboard</div>
+      <div class="title"><a href="http://localhost/abitodo" style="color: #ffffff;"><?= SITE_TITLE ?></a></div>
       <div class="userPanel"><i class="fa fa-chevron-down"></i><span class="username">M.Gazori </span><img src="assets/img/user.jpeg" width="40" height="40" /></div>
     </div>
     <div class="main">
@@ -24,7 +25,7 @@
         </div>
         <div class="menu">
           <div class="title">Navigation</div>
-          <ul>
+          <ul id="foldersList">
             <!-- show users folder -->
             <?php foreach ($folders as $folder) : ?>
               <li>
@@ -34,6 +35,14 @@
             <?php endforeach; ?>
             <li class="active"> <i class="fa fa-folder-open"></i>Messages</li>
           </ul>
+        </div>
+        <div class="addFolderBox">
+          <form action="process/ajaxHandler.php" method="POST" id="addFolderForm">
+            <input type="text" id="addFolderInput" placeholder="add folder here" autocomplete="off">
+            <button class="addFolderbtn" title="add folder">
+              <i class="fa fa-plus"></i>
+            </button>
+          </form>
         </div>
       </div>
       <div class="view">
@@ -64,23 +73,21 @@
               </li>
             </ul>
           </div>
-          <div class="list">
+          <!-- <div class="list">
             <div class="title">Tomorrow</div>
             <ul>
               <li><i class="fa fa-square-o"></i><span>Find front end developer</span>
                 <div class="info"></div>
               </li>
-            </ul>
-          </div>
+            </ul> -->
         </div>
       </div>
     </div>
   </div>
-  <!-- partial -->
-  <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> -->
+  </div>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <script src="assets/js/script.js"></script>
-
 </body>
 
 </html>
