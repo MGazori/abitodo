@@ -62,9 +62,9 @@ function getTasks($data = null)
 function deleteTasks($data)
 {
     global $pdo;
-    $sql = "DELETE FROM tasks where id = :taskID";
+    $sql = "DELETE FROM tasks where id = :taskId";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([":taskID" => $data]);
+    $stmt->execute([":taskId" => $data]);
     return $stmt->rowCount();
 }
 
@@ -81,4 +81,48 @@ function filterTasksByFolder($data)
         </li>
 <?php
     }
+}
+// define function for add task
+function addTask($taskTitle, $folderId)
+{
+    global $pdo;
+    $userId = getCurrentUserID();
+    $sql = "INSERT INTO tasks (title,user_id,folder_id) VALUES (:taskTitle , :user_id, :folder_id)";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([":taskTitle" => $taskTitle, ":user_id" => $userId, ":folder_id" => $folderId]);
+    $records = $pdo->lastInsertId();
+    return $records;
+}
+//get single task
+function getSingleTask($data = null)
+{
+    global $pdo;
+    $userId = getCurrentUserID();
+    $sql = "SELECT * FROM tasks WHERE user_id = $userId AND id = :taskId";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([":taskId" => $data]);
+    $records = $stmt->fetch(PDO::FETCH_OBJ);
+    return $records;
+}
+//change task status
+function changeTaskStatus($data)
+{
+    global $pdo;
+    $userId = getCurrentUserID();
+    $sql = "UPDATE tasks SET is_done = 1 - is_done WHERE user_id = $userId AND id = :taskId";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([":taskId" => $data]);
+    $records = $stmt->rowCount();
+    return $records;
+}
+//get single task show is_done status
+function getIsDoneStatus($data = null)
+{
+    global $pdo;
+    $userId = getCurrentUserID();
+    $sql = "SELECT is_done FROM tasks WHERE user_id = $userId AND id = :taskId";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([":taskId" => $data]);
+    $records = $stmt->fetch(PDO::FETCH_OBJ);
+    return $records;
 }

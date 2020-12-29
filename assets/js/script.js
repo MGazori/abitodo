@@ -113,7 +113,8 @@ $(document).ready(function() {
                 success: function(response) {
                     if (response.length > 0) {
                         $("#taskList").html(response);
-                        removeTaskFunc()
+                        removeTaskFunc();
+                        changeTaskStatus();
                     } else {
                         $("#taskList").html('<div class="emptyTask">No Task Here!</div>');
                     }
@@ -122,9 +123,55 @@ $(document).ready(function() {
         })
     }
     selectTaskFolderFunc();
+    //add task function
+    function addTaskFunc() {
+        $("#addTaskForm").submit(function(event) {
+            var inputAddTask = $("#addTaskInput");
+            var selectedFolder = $('.folderRow.active').attr('data-folder-id');
+            event.preventDefault()
+            $.ajax({
+                url: "process/ajaxHandler.php",
+                method: "POST",
+                dataType: "JSON",
+                data: {
+                    action: "addTask",
+                    taskTitle: inputAddTask.val(),
+                    tasksFolder: selectedFolder
+                },
+                success: function(response) {
+                    if (response.id) {
+                        var addTaskID = response.id;
+                        var addTaskTitle = response.title;
+                        var addTaskCreated_at = response.created_at;
+                        var taskRow = "<li data-task-id='" + addTaskID + "' class='taskRow'><i class='fa fa-square-o'></i><span>" + addTaskTitle + "</span><div class='info'><span class='task-created-at'>" + addTaskCreated_at + "</span><button class='removeTaskBtn' data-task-id='" + addTaskID + "'></button></div></li>"
+                        if ($(".emptyTask").hasClass("emptyTask")) {
+                            $("#taskList").html(taskRow);
+                        } else {
+                            $("#taskList").append(taskRow);
+                        }
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Task Added! 🎉',
+                        })
+                        inputAddTask.val('')
+                        removeTaskFunc();
+                        changeTaskStatus();
+                    } else {
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'error:',
+                            text: response.description,
+                        })
+                    }
+                }
+            })
+        })
+    }
+    addTaskFunc();
     //ajax delete task
     function removeTaskFunc() {
-        $('.removeTaskBtn').click(function() {
+        $('.removeTaskBtn').click(function(event) {
+            event.stopPropagation();
             var taskId = $(this).attr('data-task-id');
             Swal.fire({
                 title: 'Are you sure?',
@@ -151,6 +198,10 @@ $(document).ready(function() {
                                     title: 'Task Deleted! 😊',
                                 })
                                 $('.taskRow[data-task-id=' + taskId + ']').remove();
+                                if ($('#taskList').is(':empty')) {
+                                    var emptyTask = "<div class='emptyTask'>No Task Here!</div>";
+                                    $("#taskList").html(emptyTask);
+                                }
                             } else {
                                 Toast.fire({
                                     icon: 'error',
@@ -165,4 +216,42 @@ $(document).ready(function() {
         })
     }
     removeTaskFunc();
+    //done or undone tasks
+    function changeTaskStatus() {
+        $('.taskRow').click(function() {
+            $(this).toggleClass('checked');
+            $(this).find('i').toggleClass('fa-square-o fa-check-square-o');
+            var taskClickedId = $(this).attr('data-task-id');
+            $.ajax({
+                url: "process/ajaxHandler.php",
+                method: "POST",
+                dataType: "JSON",
+                data: {
+                    action: "taskDoneSwitch",
+                    taskId: taskClickedId
+                },
+                success: function(response) {
+                    if (response.is_done == 1) {
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Task Completed! ✔',
+                        })
+                    } else if (response.is_done == 0) {
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Task UnChecked! ❌',
+                        })
+                    } else {
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'error:',
+                            text: response.description,
+                        })
+                    }
+                }
+            })
+        })
+    }
+    changeTaskStatus();
+    $('#addTaskInput').focus();
 })

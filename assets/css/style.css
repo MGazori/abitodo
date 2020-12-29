@@ -26,6 +26,7 @@ a {
 
 .page {
     position: absolute;
+    min-height: 750px;
     width: 80%;
     height: 80%;
     left: 10%;
@@ -206,13 +207,14 @@ a {
     border-bottom: 1px solid #E0E0E0;
 }
 
-.main .view .viewHeader .title {
+div.addTask {
     float: left;
     font-size: 1.4em;
     font-weight: 400;
     padding: 0px;
     color: #AAA;
     margin-top: -18px;
+    width: 40%;
 }
 
 .main .view .viewHeader .functions {
@@ -272,15 +274,14 @@ a {
 }
 
 .main .view .content .list ul li {
-    width: 100%;
-    height: 50px;
-    line-height: 50px;
+    height: 60px;
+    line-height: 60px;
     list-style: none;
-    border-top: 1px solid #AAA;
 }
 
 .main .view .content .list ul li.checked {
-    background-color: #F0F4F5;
+    background-color: rgb(76 175 80 / 0.2);
+    color: #4CAF50;
 }
 
 .main .view .content .list ul li:last-child {
@@ -290,8 +291,8 @@ a {
 .main .view .content .list ul li i {
     float: left;
     width: 30px;
-    height: 50px;
-    line-height: 50px;
+    height: 60px;
+    line-height: 60px;
     margin-left: 10px;
     font-size: 1.3em;
 }
@@ -436,9 +437,17 @@ li.folderRow.active:before {
     content: "\f07c";
     font-family: 'FontAwesome';
     font-size: 20px;
-    color: #2196F3;
+    color: #4CAF50;
     position: relative;
     top: 2px;
+}
+
+li.folderRow.active span {
+    color: #4CAF50 !important;
+}
+
+li.folderRow.active:hover {
+    background-color: rgb(76 175 80 / 0.2) !important;
 }
 
 .emptyTask {
@@ -448,4 +457,57 @@ li.folderRow.active:before {
     background-color: rgb(244 67 54 / 0.1);
     padding: 3px 15px;
     border-radius: 5px;
+}
+
+button.addtaskbtn {
+    width: 20%;
+    height: 35px;
+    border: none;
+    background-color: rgb(33 150 243 / 0.2);
+    color: #2196F3;
+    cursor: pointer;
+    position: relative;
+    bottom: 2px;
+}
+
+input#addTaskInput {
+    width: 70%;
+    font-size: 18px;
+    padding: 5px 10px;
+    background-color: #ffffff;
+    color: Black;
+    font-family: "Lato";
+    border: 2px solid #eee;
+    border-radius: 5px;
+}
+
+li.taskRow {
+    border: none !important;
+    border-radius: 7px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    margin: 15px 35px 15px 15px;
+    background-color: #ffffff;
+}
+
+li.taskRow:hover {
+    cursor: pointer;
+    background-color: rgb(76 175 80 / 0.2);
+    color: #4CAF50;
+}
+
+div.taskInfoTitle {
+    width: 100%;
+    padding: 10px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #2196F3;
+}
+
+span.taskInfoCreatedAt {
+    float: right;
+    margin-right: 50px;
+}
+
+span.taskInfoTitle {
+    margin-left: 20px;
 }

@@ -48,16 +48,23 @@
       </div>
       <div class="view">
         <div class="viewHeader">
-          <div class="title">Manage Tasks</div>
+          <div class="addTask">
+            <form action="process/ajaxHandler.php" method="POST" id="addTaskForm">
+              <input type="text" id="addTaskInput" placeholder="add task here" autocomplete="off">
+              <button class="addtaskbtn" title="add task">Add Task</button>
+            </form>
+          </div>
           <div class="functions">
             <div class="button active">Add New Task</div>
             <div class="button">Completed</div>
-            <div class="button inverz"><i class="fa fa-trash-o"></i></div>
           </div>
         </div>
         <div class="content">
           <div class="list">
-            <div class="title">Today</div>
+            <div class="taskInfoTitle">
+              <span class="taskInfoTitle">Title</span>
+              <span class="taskInfoCreatedAt">Create Time</span>
+            </div>
             <ul id="taskList">
               <!-- show user tasks -->
               <?php foreach ($tasks as $task) : ?>

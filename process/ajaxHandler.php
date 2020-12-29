@@ -16,6 +16,7 @@ switch ($_POST['action']) {
                 "description" => "The folder name must be at least 3 letters long."
             ];
             echo json_encode($addFolderError);
+            die();
         } else {
             $lasInsertId = addFolder($_POST['folderName']);
             echo json_encode(addNewFolderRow($lasInsertId));
@@ -28,19 +29,42 @@ switch ($_POST['action']) {
                 "description" => "Folder not deleted!"
             ];
             echo json_encode($deleteFolderError);
+            die();
         } else {
             echo json_encode(deleteFolders($_POST['deleteFolderId']));
         }
         break;
     case "selectFolder":
         if (!isset($_POST['folderSelectedId'])) {
-            $deleteFolderError = [
+            $selectFolderError = [
                 "name" => "selectFolderError",
                 "description" => "Folder not deleted!"
             ];
-            echo json_encode($deleteFolderError);
+            echo json_encode($selectFolderError);
+            die();
         } else {
             filterTasksByFolder($_POST['folderSelectedId']);
+        }
+        break;
+    case "addTask":
+        if (!isset($_POST['tasksFolder']) || $_POST['tasksFolder'] == "all") {
+            $addTaskError = [
+                "name" => "addTaskError",
+                "description" => "Folder Not Selected!"
+            ];
+            echo json_encode($addTaskError);
+            die();
+        } else if (strlen($_POST['taskTitle']) < 3 || empty($_POST['taskTitle'])) {
+            $addTaskError = [
+                "name" => "addTaskError",
+                "description" => "The task name must be at least 3 letters long."
+            ];
+            echo json_encode($addTaskError);
+            die();
+        } else {
+            $addTask = addTask($_POST['taskTitle'], $_POST['tasksFolder']);
+            $taskInfo = getSingleTask($addTask);
+            echo json_encode($taskInfo);
         }
         break;
     case "deleteTask":
@@ -50,8 +74,22 @@ switch ($_POST['action']) {
                 "description" => "Task not deleted!"
             ];
             echo json_encode($deleteTaskError);
+            die();
         } else {
             echo json_encode(deleteTasks($_POST['deleteTaskId']));
+        }
+        break;
+    case "taskDoneSwitch":
+        if (!isset($_POST['taskId']) || !is_numeric($_POST['taskId'])) {
+            $changeTaskStatus = [
+                "name" => "changeTaskStatusError",
+                "description" => "invalid Action!"
+            ];
+            echo json_encode($changeTaskStatus);
+            die();
+        } else {
+            changeTaskStatus($_POST['taskId']);
+            echo json_encode(getIsDoneStatus($_POST['taskId']));
         }
         break;
     default:
