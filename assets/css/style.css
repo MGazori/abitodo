@@ -26,7 +26,7 @@ a {
 
 .page {
     position: absolute;
-    min-height: 750px;
+    min-height: 650px;
     width: 80%;
     height: 80%;
     left: 10%;
@@ -163,7 +163,8 @@ a {
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
-    transition: 0.25s all;
+    /* transition: 0.25s all; */
+    transition: 0.3s ease-in-out;
 }
 
 .main .nav .menu ul li.active {
@@ -484,9 +485,11 @@ input#addTaskInput {
 li.taskRow {
     border: none !important;
     border-radius: 7px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
+    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
     margin: 15px 35px 15px 15px;
     background-color: #ffffff;
+    transition: 0.3s ease-in-out;
 }
 
 li.taskRow:hover {
@@ -510,4 +513,11 @@ span.taskInfoCreatedAt {
 
 span.taskInfoTitle {
     margin-left: 20px;
+}
+
+a.logOut {
+    color: #ffffff;
+    font-size: 25px;
+    position: relative;
+    top: 2px;
 }

@@ -15,7 +15,9 @@
   <div class="page">
     <div class="pageHeader">
       <div class="title"><a href="http://localhost/abitodo" style="color: #ffffff;"><?= SITE_TITLE ?></a></div>
-      <div class="userPanel"><i class="fa fa-chevron-down"></i><span class="username">M.Gazori </span><img src="assets/img/user.jpeg" width="40" height="40" /></div>
+      <div class="userPanel">
+        <a class="logOut" href="<?= site_url('?logout=1') ?>" title="log out"><i class="fa fa-sign-out"></i></a>
+        <span class="username"><?= $userInfo->name ?? "unknown" ?></span><img src="<?= $userInfo->profileImage ?? "assets/img/user.jpeg" ?>" width="40" height="40" /></div>
     </div>
     <div class="main">
       <div class="nav">
@@ -66,7 +68,7 @@
               <span class="taskInfoCreatedAt">Create Time</span>
             </div>
             <ul id="taskList">
-              <!-- show user tasks -->
+              <?= $emptyTask ?? null ?>
               <?php foreach ($tasks as $task) : ?>
                 <li data-task-id="<?= $task->id ?>" <?= ($task->is_done) ? "class='checked taskRow'" : "class='taskRow'" ?>><i class="fa <?= ($task->is_done) ? "fa-check-square-o" : 'fa-square-o' ?>"></i><span><?= $task->title ?></span>
                   <div class="info">
@@ -82,6 +84,7 @@
     </div>
   </div>
   </div>
+  <audio id='task-done-audio' src='assets/audio/taskRingtone.mp3'></audio>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <script src="assets/js/script.js"></script>

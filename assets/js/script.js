@@ -1,4 +1,8 @@
 $(document).ready(function() {
+    // define function for find empty element
+    function isEmpty(el) {
+        return !$.trim(el.html())
+    }
     //define setting for sweetalert2 toast mode
     const Toast = Swal.mixin({
             toast: true,
@@ -143,19 +147,19 @@ $(document).ready(function() {
                         var addTaskID = response.id;
                         var addTaskTitle = response.title;
                         var addTaskCreated_at = response.created_at;
-                        var taskRow = "<li data-task-id='" + addTaskID + "' class='taskRow'><i class='fa fa-square-o'></i><span>" + addTaskTitle + "</span><div class='info'><span class='task-created-at'>" + addTaskCreated_at + "</span><button class='removeTaskBtn' data-task-id='" + addTaskID + "'></button></div></li>"
+                        var taskRowElement = "<li data-task-id='" + addTaskID + "' class='taskRow'><i class='fa fa-square-o'></i><span>" + addTaskTitle + "</span><div class='info'><span class='task-created-at'>" + addTaskCreated_at + "</span><button class='removeTaskBtn' data-task-id='" + addTaskID + "'></button></div></li>"
                         if ($(".emptyTask").hasClass("emptyTask")) {
-                            $("#taskList").html(taskRow);
+                            $("#taskList").html(taskRowElement);
                         } else {
-                            $("#taskList").append(taskRow);
+                            $("#taskList").append(taskRowElement);
                         }
                         Toast.fire({
                             icon: 'success',
                             title: 'Task Added! 🎉',
                         })
+                        removeTaskFunc()
+                        changeTaskStatus()
                         inputAddTask.val('')
-                        removeTaskFunc();
-                        changeTaskStatus();
                     } else {
                         Toast.fire({
                             icon: 'error',
@@ -198,7 +202,7 @@ $(document).ready(function() {
                                     title: 'Task Deleted! 😊',
                                 })
                                 $('.taskRow[data-task-id=' + taskId + ']').remove();
-                                if ($('#taskList').is(':empty')) {
+                                if (isEmpty($('#taskList'))) {
                                     var emptyTask = "<div class='emptyTask'>No Task Here!</div>";
                                     $("#taskList").html(emptyTask);
                                 }
@@ -218,7 +222,8 @@ $(document).ready(function() {
     removeTaskFunc();
     //done or undone tasks
     function changeTaskStatus() {
-        $('.taskRow').click(function() {
+        $('.taskRow').click(function(e) {
+            e.stopImmediatePropagation();
             $(this).toggleClass('checked');
             $(this).find('i').toggleClass('fa-square-o fa-check-square-o');
             var taskClickedId = $(this).attr('data-task-id');
@@ -236,6 +241,8 @@ $(document).ready(function() {
                             icon: 'success',
                             title: 'Task Completed! ✔',
                         })
+                        document.getElementById('task-done-audio').currentTime = 0;
+                        document.getElementById('task-done-audio').play();
                     } else if (response.is_done == 0) {
                         Toast.fire({
                             icon: 'success',

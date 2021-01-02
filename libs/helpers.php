@@ -6,7 +6,17 @@ function diePage($msg)
     echo "<div style='padding: 50px 30px; width: 80%; margin: 50px auto; border-radius: 10px; background-color: rgba(244,67,54 ,0.2); color: #f44336; font-family: sans-serif;'>$msg</div>";
     die();
 }
-
+//define function for show message
+function message($msg, $cssClass = 'info')
+{
+    echo "<div class='$cssClass' style='padding: 30px 30px; width: 80%; margin: 10px auto; border-radius: 10px; background-color: rgba(244,67,54 ,0.2); color: #f44336; font-family: sans-serif;'>$msg</div>";
+}
+//define function for redirect
+function redirect($address)
+{
+    header("location:" . $address);
+    die();
+}
 //define function for validate ajax request
 function isAjaxRequest()
 {
@@ -15,6 +25,11 @@ function isAjaxRequest()
     } else {
         return false;
     }
+}
+//define function for using full url in project
+function site_url($uri = '')
+{
+    return BASE_URL . $uri;
 }
 //beadufull var_dump
 function dd($data)

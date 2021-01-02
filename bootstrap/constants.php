@@ -1,3 +1,5 @@
 <?php
 define("SITE_TITLE", "abi TODO");
-define("BASE_PATH", "C:/xampp/htdocs/abitodo/");
+define("BASE_URL", "http://localhost/abitodo/");
+$basePath = __DIR__ . '/../';
+define("BASE_PATH", "$basePath");
