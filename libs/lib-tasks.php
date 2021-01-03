@@ -79,7 +79,7 @@ function filterTasksByFolder($data)
                 <button class="removeTaskBtn" data-task-id="<?= $task->id ?>"></button>
             </div>
         </li>
-<?php
+    <?php
     }
 }
 // define function for add task
@@ -125,4 +125,43 @@ function getIsDoneStatus($data = null)
     $stmt->execute([":taskId" => $data]);
     $records = $stmt->fetch(PDO::FETCH_OBJ);
     return $records;
+}
+//filter tasks
+function filterTasks($filterMode, $selectedFolder = null)
+{
+    if ($filterMode == "created_at_ASC") {
+        $filterSql = "ORDER BY tasks.created_at ASC";
+    } else if ($filterMode == "created_at_DESC") {
+        $filterSql = "ORDER BY tasks.created_at DESC";
+    } else if ($filterMode == "is_done_checked") {
+        $filterSql = "AND is_done = 1";
+    } else if ($filterMode == "is_done_unchecked") {
+        $filterSql = "AND is_done = 0";
+    }
+    if ($selectedFolder == "all") {
+        $folderFilter = "";
+    } else {
+        $folderFilter = "AND folder_id = $selectedFolder";
+    }
+    global $pdo;
+    $userId = getCurrentUserID();
+    $sql = "SELECT * FROM tasks WHERE user_id = :user_id $folderFilter $filterSql";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([":user_id" => $userId]);
+    $records = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $records;
+}
+//show filterd task 
+function showFilterdTasks($data)
+{
+    $tasks = $data;
+    foreach ($tasks as $task) { ?>
+        <li data-task-id="<?= $task->id ?>" <?= ($task->is_done) ? "class='checked taskRow'" : "class='taskRow'" ?>><i class="fa <?= ($task->is_done) ? "fa-check-square-o" : 'fa-square-o' ?>"></i><span><?= $task->title ?></span>
+            <div class="info">
+                <span class="task-created-at"><?= $task->created_at ?></span>
+                <button class="removeTaskBtn" data-task-id="<?= $task->id ?>"></button>
+            </div>
+        </li>
+<?php
+    }
 }

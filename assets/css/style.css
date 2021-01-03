@@ -218,6 +218,27 @@ div.addTask {
     width: 40%;
 }
 
+@media only screen and (max-width: 1340px) {
+    div.addTask {
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 1065px) {
+    div.addTask {
+        width: 60%;
+    }
+    button.addtaskbtn {
+        font-size: 13px;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    button.addtaskbtn {
+        font-size: 10px;
+    }
+}
+
 .main .view .viewHeader .functions {
     float: right;
 }
@@ -520,4 +541,49 @@ a.logOut {
     font-size: 25px;
     position: relative;
     top: 2px;
+}
+
+div.filterBox {
+    float: right;
+}
+
+button.sortBtn {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    bottom: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(33 150 243 / 0.1);
+    color: #2196F3;
+}
+
+button.sortBtn:before {
+    font-size: 15px;
+}
+
+button.sortBtn.active {
+    background-color: rgb(76 175 80 / 0.1);
+    color: #4CAF50;
+}
+
+button#sort-old:before {
+    content: "\f161";
+    font-family: 'FontAwesome';
+}
+
+button#sort-new:before {
+    content: "\f160";
+    font-family: 'FontAwesome';
+}
+
+button#sort-done:before {
+    content: "\f046";
+    font-family: 'FontAwesome';
+}
+
+button#sort-undone:before {
+    content: "\f096";
+    font-family: 'FontAwesome';
 }

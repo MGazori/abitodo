@@ -117,6 +117,7 @@ $(document).ready(function() {
                 success: function(response) {
                     if (response.length > 0) {
                         $("#taskList").html(response);
+                        $('button.sortBtn[data-sort-mode="old-first"]').click();
                         removeTaskFunc();
                         changeTaskStatus();
                     } else {
@@ -260,5 +261,38 @@ $(document).ready(function() {
         })
     }
     changeTaskStatus();
+    //define function for sort task
+    function sortTasks() {
+        $('.sortBtn').click(function() {
+            $('.sortBtn').removeClass('active');
+            $(this).addClass("active");
+            var activeFolder = $('.folderRow.active').attr('data-folder-id');
+            var sortModeAttr = $(this).attr('data-sort-mode');
+            if (sortModeAttr == 'old-first') {
+                var activeSortMode = "created_at_ASC";
+            } else if (sortModeAttr == 'new-first') {
+                var activeSortMode = "created_at_DESC";
+            } else if (sortModeAttr == 'just-done') {
+                var activeSortMode = "is_done_checked";
+            } else if (sortModeAttr == 'just-undone') {
+                var activeSortMode = "is_done_unchecked";
+            }
+            $.ajax({
+                url: "process/ajaxHandler.php",
+                method: "POST",
+                data: {
+                    action: "filterTasks",
+                    selectedFolderId: activeFolder,
+                    sortMode: activeSortMode
+                },
+                success: function(response) {
+                    $("#taskList").html(response);
+                    removeTaskFunc();
+                    changeTaskStatus();
+                }
+            })
+        })
+    }
+    sortTasks();
     $('#addTaskInput').focus();
 })

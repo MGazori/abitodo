@@ -56,9 +56,11 @@
               <button class="addtaskbtn" title="add task">Add Task</button>
             </form>
           </div>
-          <div class="functions">
-            <div class="button active">Add New Task</div>
-            <div class="button">Completed</div>
+          <div class="filterBox">
+            <button id="sort-undone" class="sortBtn" data-sort-mode="just-undone" title="sort task by undone"></button>
+            <button id="sort-done" class="sortBtn" data-sort-mode="just-done" title="sort task by done"></button>
+            <button id="sort-new" class="sortBtn" data-sort-mode="new-first" title="sort task by new first"></button>
+            <button id="sort-old" class="sortBtn active" data-sort-mode="old-first" title="sort task by older first"></button>
           </div>
         </div>
         <div class="content">

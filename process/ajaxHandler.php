@@ -92,6 +92,19 @@ switch ($_POST['action']) {
             echo json_encode(getIsDoneStatus($_POST['taskId']));
         }
         break;
+    case "filterTasks":
+        if (isset($_POST['sortMode']) || $_POST['sortMode'] == "created_at_DESC" || $_POST['sortMode'] == "created_at_ASC" || $_POST['sortMode'] == "is_done_checked" || $_POST['sortMode'] == "is_done_unchecked") {
+            $filterdTask = filterTasks($_POST['sortMode'], $_POST['selectedFolderId']);
+            echo showFilterdTasks($filterdTask);
+        } else {
+            $changeTaskStatus = [
+                "name" => "filterTaskError",
+                "description" => "invalid Action!"
+            ];
+            echo json_encode($changeTaskStatus);
+            die();
+        }
+        break;
     default:
         diePage("Invalid Action!");
 }
