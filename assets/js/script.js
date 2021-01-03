@@ -287,6 +287,10 @@ $(document).ready(function() {
                 },
                 success: function(response) {
                     $("#taskList").html(response);
+                    if (isEmpty($('#taskList'))) {
+                        var emptyTask = "<div class='emptyTask'>No Task Here!</div>";
+                        $("#taskList").html(emptyTask);
+                    }
                     removeTaskFunc();
                     changeTaskStatus();
                 }
@@ -294,5 +298,52 @@ $(document).ready(function() {
         })
     }
     sortTasks();
+    //search tasks feature
+    function searchTasks() {
+        $('#taskSeachInput').on('keyup change', function() {
+            var searchText = $(this).val();
+            var searchTaskText = searchText.length;
+            var activeFolder = $('.folderRow.active').attr('data-folder-id');
+            if (searchTaskText > 1) {
+                $.ajax({
+                    url: "process/ajaxHandler.php",
+                    method: "POST",
+                    data: {
+                        action: "searchTasks",
+                        selectedFolderId: activeFolder,
+                        searchTxt: searchText
+                    },
+                    success: function(response) {
+                        $("#taskList").html(response);
+                        if (isEmpty($('#taskList'))) {
+                            var emptyTask = "<div class='emptyTask'>No Task Here!</div>";
+                            $("#taskList").html(emptyTask);
+                        }
+                        removeTaskFunc();
+                        changeTaskStatus();
+                    }
+                })
+            } else {
+                $.ajax({
+                    url: "process/ajaxHandler.php",
+                    method: "POST",
+                    data: {
+                        action: "getTasks",
+                        selectedFolderId: activeFolder,
+                    },
+                    success: function(response) {
+                        $("#taskList").html(response);
+                        if (isEmpty($('#taskList'))) {
+                            var emptyTask = "<div class='emptyTask'>No Task Here!</div>";
+                            $("#taskList").html(emptyTask);
+                        }
+                        removeTaskFunc();
+                        changeTaskStatus();
+                    }
+                })
+            }
+        });
+    }
+    searchTasks()
     $('#addTaskInput').focus();
 })

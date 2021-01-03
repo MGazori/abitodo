@@ -23,7 +23,7 @@
       <div class="nav">
         <div class="searchbox">
           <div><i class="fa fa-search"></i>
-            <input type="search" placeholder="Search" />
+            <input id="taskSeachInput" type="search" placeholder="Search" />
           </div>
         </div>
         <div class="menu">

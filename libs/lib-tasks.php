@@ -151,8 +151,27 @@ function filterTasks($filterMode, $selectedFolder = null)
     $records = $stmt->fetchAll(PDO::FETCH_OBJ);
     return $records;
 }
-//show filterd task 
-function showFilterdTasks($data)
+//define function fo search between tasks
+function searchTasks($searchtext, $selectedFolder = null)
+{
+    if ($selectedFolder == "all") {
+        $folderFilter = "";
+    } else {
+        $folderFilter = "AND folder_id = $selectedFolder";
+    }
+    global $pdo;
+    $userId = getCurrentUserID();
+    $sql = "SELECT * FROM tasks WHERE user_id = :user_id AND title LIKE :searchtxt $folderFilter";
+    $stmt = $pdo->prepare($sql);
+    $searchtxt = "%" . $searchtext . "%";
+    $stmt->bindParam(':searchtxt', $searchtxt, PDO::PARAM_STR);
+    $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+    $stmt->execute();
+    $records = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $records ?? null;
+}
+//show tasks 
+function showTasks($data)
 {
     $tasks = $data;
     foreach ($tasks as $task) { ?>

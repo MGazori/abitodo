@@ -95,14 +95,40 @@ switch ($_POST['action']) {
     case "filterTasks":
         if (isset($_POST['sortMode']) || $_POST['sortMode'] == "created_at_DESC" || $_POST['sortMode'] == "created_at_ASC" || $_POST['sortMode'] == "is_done_checked" || $_POST['sortMode'] == "is_done_unchecked") {
             $filterdTask = filterTasks($_POST['sortMode'], $_POST['selectedFolderId']);
-            echo showFilterdTasks($filterdTask);
+            echo showTasks($filterdTask);
         } else {
-            $changeTaskStatus = [
+            $filterTask = [
                 "name" => "filterTaskError",
                 "description" => "invalid Action!"
             ];
-            echo json_encode($changeTaskStatus);
+            echo json_encode($filterTask);
             die();
+        }
+        break;
+    case "searchTasks":
+        if (!isset($_POST['searchTxt']) || strlen($_POST['searchTxt']) < 2) {
+            $searchTasks = [
+                "name" => "searchTasksError",
+                "description" => "The search text must be at least 3 letters long."
+            ];
+            echo json_encode($searchTasks);
+            die();
+        } else {
+            $searchTasks = searchTasks($_POST['searchTxt'], $_POST['selectedFolderId']);
+            echo showTasks($searchTasks);
+        }
+        break;
+    case "getTasks":
+        if (!isset($_POST['selectedFolderId'])) {
+            $getTasks = [
+                "name" => "getTasksError",
+                "description" => "get tasks error."
+            ];
+            echo json_encode($getTasks);
+            die();
+        } else {
+            $getTasks = getTasks($_POST['selectedFolderId']);
+            echo showTasks($getTasks);
         }
         break;
     default:
