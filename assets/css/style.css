@@ -587,3 +587,9 @@ button#sort-undone:before {
     content: "\f096";
     font-family: 'FontAwesome';
 }
+
+.list {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 620px;
+}
