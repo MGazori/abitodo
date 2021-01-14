@@ -20,6 +20,7 @@
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
                 </div>
                 <span>or use your email for registration</span>
+                <span class="stay-login-msg">You'll stay loging in one this device for 20 days.</span>
                 <input name="email" type="email" placeholder="Email" required />
                 <input name="name" type="name" placeholder="Name" required />
                 <input name="password" type="password" placeholder="Password" required />
@@ -35,9 +36,9 @@
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
                 </div>
                 <span>or use your account</span>
+                <span class="stay-login-msg">You'll stay loging in one this device for 20 days.</span>
                 <input name="email" type="email" placeholder="Email" required />
                 <input name="password" type="password" placeholder="Password" required />
-                <a href="#">Forgot your password?</a>
                 <button type="submit">Sign In</button>
             </form>
         </div>

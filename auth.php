@@ -1,6 +1,8 @@
 <?php
 include "bootstrap/init.php";
-$email = "pattrick@tutorialspoint.com";
+if (isLoggedIn()) {
+    redirect(site_url(""));
+}
 //form submition
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $action = $_GET['action'];
@@ -30,9 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (!$result) {
             message("email or password is incorrect", "error");
         } else {
+            deleteExpireTokenRow();
             redirect(site_url(''));
         }
     }
 }
-// var_dump($_POST);
 include "tpl/auth-tpl.php";

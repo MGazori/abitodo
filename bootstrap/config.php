@@ -4,5 +4,6 @@ $database_config = (object)[
     'host' => 'localhost',
     'user' => 'root',
     'password' => '',
-    'dbname' => 'abitodo'
+    'dbname' => 'abitodo',
+    'charset' => 'utf8mb4'
 ];

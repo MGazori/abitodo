@@ -264,3 +264,14 @@ footer a {
     background-color: rgba(244, 67, 54, 0.2) !important;
     color: #f44336 !important;
 }
+
+.stay-login-msg {
+    font-size: 11px;
+    line-height: 24px;
+    background-color: rgb(76 175 80 / 0.1);
+    color: #4CAF50;
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 5px;
+    width: 100%;
+}
