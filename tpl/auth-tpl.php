@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title><?= SITE_TITLE . "Login / Sign Up" ?></title>
+    <link rel="shortcut icon" href="<?= BASE_URL ?>assets/img/favicon-64.png">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css'>
     <link rel="stylesheet" href="assets/css/auth.css">
 </head>
@@ -23,7 +24,7 @@
                 <span class="stay-login-msg">You'll stay loging in one this device for 20 days.</span>
                 <input name="email" type="email" placeholder="Email" required />
                 <input name="name" type="name" placeholder="Name" required />
-                <input name="password" type="password" placeholder="Password" required />
+                <input name="password" type="password" placeholder="Password" minlength="8" required />
                 <button type="submit">Sign Up</button>
             </form>
         </div>
@@ -39,6 +40,7 @@
                 <span class="stay-login-msg">You'll stay loging in one this device for 20 days.</span>
                 <input name="email" type="email" placeholder="Email" required />
                 <input name="password" type="password" placeholder="Password" required />
+                <a href="?action=reset-password" id="reset-password">Reset Password!</a>
                 <button type="submit">Sign In</button>
             </form>
         </div>
@@ -55,6 +57,11 @@
                     <button class="ghost" id="signUp">Sign Up</button>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="project-info-container">
+        <div class="project-info">
+            <h4>This Open Source Project Developed In Beta Version By <a href="https://mgazori.com/">Mohammad Gazori</a>. Go To <a href="https://github.com/MGazori/abitodo">GitHub</a></h4>
         </div>
     </div>
     <script src="assets/js/auth.js"></script>

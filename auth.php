@@ -9,15 +9,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $params = $_POST;
     $siteBaseUrl = site_url();
     if ($action == 'register') {
-        $uppercase = preg_match('@[A-Z]@', $params['password']);
-        $lowercase = preg_match('@[a-z]@', $params['password']);
-        $number = preg_match('@[0-9]@', $params['password']);
         if (empty($params['name']) || empty($params['email']) || empty($params['password'])) {
             message("Error: complete the form!", "error");
         } else if (!filter_var($params['email'], FILTER_VALIDATE_EMAIL)) {
             message("Error: enter the valid email address", "error");
-        } else if (!$uppercase || !$lowercase || !$number || strlen($params['password']) < 8) {
-            message('Password should be at least 8 characters in length and should include at least one upper case letter, one number.', 'error');
+        } else if (!passwordIsStrong($params['password'])) {
+            message('Password should be at least 8 characters in length and should include at least one lower and upper case letter, one number!', 'error');
         } else {
             $result = register($params);
             if (!$result) {
@@ -36,5 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             redirect(site_url(''));
         }
     }
+}
+//check if user request for reset password show reset template
+if ($_GET['action'] == 'reset-password') {
+    include "tpl/reset-pass-tpl.php";
+    die();
 }
 include "tpl/auth-tpl.php";

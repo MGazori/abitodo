@@ -4,13 +4,14 @@
 }
 
 body {
-    background: #f6f5f7;
+    background-image: url('../img/background.jpg');
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     font-family: 'Montserrat', sans-serif;
     height: 100vh;
+    overflow: hidden;
     margin: -20px 0 50px;
 }
 
@@ -274,4 +275,33 @@ footer a {
     border-radius: 5px;
     margin-top: 5px;
     width: 100%;
+}
+
+.project-info-container {
+    display: flex;
+    justify-content: center;
+}
+
+.project-info {
+    color: #ffffff;
+    font-family: sans-serif;
+    font-size: 12px;
+    position: absolute;
+    bottom: 10px;
+    background: #2196f3;
+    padding: 0 20px;
+    border-radius: 5px;
+    text-align: center;
+    z-index: 100;
+}
+
+.project-info a {
+    color: #000000;
+    font-family: sans-serif;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.project-info a:hover {
+    color: #ffffff;
 }

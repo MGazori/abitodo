@@ -5,10 +5,9 @@
 <head>
   <meta charset="UTF-8">
   <title><?= SITE_TITLE ?></title>
+  <link rel="shortcut icon" href="<?= BASE_URL ?>assets/img/favicon-64.png">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-
-
 </head>
 
 <body>
@@ -17,7 +16,8 @@
       <div class="title"><a href="http://localhost/abitodo" style="color: #ffffff;"><?= SITE_TITLE ?></a></div>
       <div class="userPanel">
         <a class="logOut" href="<?= site_url('?logout=1') ?>" title="log out"><i class="fa fa-sign-out"></i></a>
-        <span class="username"><?= $userInfo->name ?? "unknown" ?></span><img src="<?= $userInfo->profileImage ?? "assets/img/user.jpeg" ?>" width="40" height="40" /></div>
+        <span class="username"><?= $userInfo->name ?? "unknown" ?></span><img src="<?= $userInfo->profileImage ?? "assets/img/user.jpeg" ?>" width="40" height="40" />
+      </div>
     </div>
     <div class="main">
       <div class="nav">
@@ -85,6 +85,11 @@
       </div>
     </div>
   </div>
+  </div>
+  <div class="project-info-container">
+    <div class="project-info">
+      <h4>This Open Source Project Developed In Beta Version By <a href="https://mgazori.com/">Mohammad Gazori</a>. Go To <a href="https://github.com/MGazori/abitodo">GitHub</a></h4>
+    </div>
   </div>
   <audio id='task-done-audio' src='assets/audio/taskRingtone.mp3'></audio>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
