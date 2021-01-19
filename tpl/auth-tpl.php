@@ -15,7 +15,7 @@
         <div class="form-container sign-up-container">
             <form action="<?= site_url('auth.php?action=register') ?>" method="POST">
                 <h1>Create Account</h1>
-                <div class="social-container">
+                <div class="social-container" id="social-register">
                     <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
@@ -31,7 +31,7 @@
         <div class="form-container sign-in-container">
             <form action="<?= site_url('auth.php?action=login') ?>" method="POST">
                 <h1>Sign in</h1>
-                <div class="social-container">
+                <div class="social-container" id="social-login">
                     <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>

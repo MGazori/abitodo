@@ -27,10 +27,9 @@
           </div>
         </div>
         <div class="menu">
-          <div class="title">Navigation</div>
+          <div class="title">Folders</div>
           <ul id="foldersList">
             <li class="folderRow active" data-folder-id="all"><span class="folderTitle">All Tasks</span></li>
-            <!-- show user folder -->
             <?php foreach ($folders as $folder) : ?>
               <li class="folderRow" data-folder-id="<?= $folder->id ?>">
                 <span class="folderTitle" data-folder-id="<?= $folder->id ?>"><?= $folder->name ?></span>

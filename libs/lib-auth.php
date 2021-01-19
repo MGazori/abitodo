@@ -127,8 +127,7 @@ function sendResetPassToken($email)
 {
     $resetPassToken = rand(10000000, 99999999);
     $_SESSION['UMAIL'] = $email;
-    // $_SESSION['URPTK'] = md5($resetPassToken);
-    $_SESSION['URPTK'] = md5(12345678);
+    $_SESSION['URPTK'] = md5($resetPassToken);
     $resetPassSubject = 'reset password code for abitodo';
     $resetPassMassage = "your code is: $resetPassToken";
     mail($_SESSION['UMAIL'], $resetPassSubject, $resetPassMassage, "From: " . SITE_MAIL);

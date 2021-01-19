@@ -1,3 +1,4 @@
+<?php defined('BASE_PATH') or die("Permision Denied"); ?>
 <!DOCTYPE html>
 <html lang="en">
 
